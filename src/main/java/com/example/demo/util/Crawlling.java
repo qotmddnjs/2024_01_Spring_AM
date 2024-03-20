@@ -54,7 +54,7 @@ public class Crawlling {
                 url = new URL(img2); // url 객체에 이미지 주소를 담음, 열림 1
                 in = url.openStream(); // in 객체에 url 정보 담음(받고싶은 데이터 연결)
                 out = new FileOutputStream(
-                        "C:\\Users\\dudcn\\git\\demo\\image_urls\\" + N + ".png"); // out 객체에 저장경로(저장을 원하는 위치) 입력
+                        "C:\\Users\\admin\\git\\2024_01_Spring_AM\\image_urls\\" + N + ".png"); // out 객체에 저장경로(저장을 원하는 위치) 입력
                 N++;
                 while (true) {
                     int data = in.read(); // in 객체로 해당 이미지를 읽어들임

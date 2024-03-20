@@ -11,7 +11,7 @@
 
  <!-- <iframe src="http://localhost:8082/usr/article/doIncreaseHitCountRd?id=372" frameborder="0"></iframe> --> 
 <!-- 변수 -->
- <script>
+<%--  <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
 	params.memberId = parseInt('${loginedMemberId}');
@@ -405,9 +405,9 @@ function doModifyReply(replyId) {
 				</c:forEach>
 			</tbody>
 		</table>
-	</div> --%>
+	</div> 
 
-</section> 
+</section>  --%>
 <body class="detail" style="background-color: black; color: white; margin: 0; padding: 0;">
     <div style="text-align: left; padding: 20px;">
         <h1 style="font-size: 24px;">영화 상세정보</h1>
@@ -437,8 +437,41 @@ function doModifyReply(replyId) {
         </div>
     </div>
 </body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var movieIndex = <%= index %>; // JSP 변수로부터 영화의 인덱스를 가져옴
 
-    
+    // 댓글 목록 로드 및 표시
+    var commentList = document.getElementById("commentList");
+    var comments = loadComments(movieIndex);
+    comments.forEach(function (comment) {
+        var li = document.createElement("li");
+        li.textContent = comment;
+        commentList.appendChild(li);
+    });
+    function saveComment(movieIndex, comment) {
+        console.log("댓글 저장 함수 호출됨: 인덱스 =", movieIndex, "댓글 =", comment);
+    }
+ // 댓글 폼 제출 이벤트 리스너
+    var commentForm = document.getElementById("commentForm");
+    commentForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // 기본 제출 동작 방지
+        var commentInput = document.getElementById("commentInput");
+        var comment = commentInput.value.trim(); // 입력된 댓글 가져오기s
+        if (comment !== "") {
+            // 댓글 저장하고 UI에 표시
+            saveComment(movieIndex, comment);
+            var li = document.createElement("li");
+            li.textContent = comment;
+            commentList.appendChild(li);
+            // 입력 필드 비우기
+            commentInput.value = "";
+        }
+    });
+
+});
+</script>
+
    
 </body>
 

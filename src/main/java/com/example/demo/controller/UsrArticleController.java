@@ -136,7 +136,8 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(HttpServletRequest req, Model model, @RequestParam(required = false) Integer index) {
 	    Rq rq = (Rq) req.getAttribute("rq");
-
+	    System.out.println("전달된 인덱스: " + index);
+	   
 	    if (index == null) {
 	        return rq.historyBackOnView("올바른 게시물이 아닙니다.");
 	    }

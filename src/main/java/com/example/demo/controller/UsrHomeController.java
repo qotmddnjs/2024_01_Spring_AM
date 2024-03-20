@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.util.Crawlling;
 import com.example.demo.util.MovieCrawl;
 
+import craw.TheaterCrawler;
+
 @Controller
 public class UsrHomeController {
 
@@ -24,8 +26,9 @@ public class UsrHomeController {
 	@RequestMapping("/usr/crawl")
 	public String doCrawl() {
 
-	Crawlling.sample();
+		/* Crawlling.sample(); */
 //		MovieCrawl.crawl();
+		TheaterCrawler.main();
 
 		return "redirect:/usr/home/main";
 	}

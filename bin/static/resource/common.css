@@ -173,14 +173,7 @@ body {
 	font-size: 24px;
 }
 
-.
-body {
-	font-family: Arial, sans-serif;
-	margin: 0;
-	padding: 0;
-	background-color: #f0f0f0;
-	padding: 0;
-}
+
 
 .good {
 	max-width: 800px;
@@ -712,48 +705,16 @@ Media Queries
 /* ------------------------
 #Display 5.5", iPad portrait, iPhone 6, 6s, 7, 8 portrait and landscape, iPhone 5s landscape
 ------------------------ */
-@media only screen and (max-width: 768px) {
-	/* #Captions */
-	.slide__caption__subtitle {
-		font-size: 1.625em;
-	}
-	.slide__caption__text {
-		font-size: 1.5em;
-	}
-}
 
 /* ------------------------
 #Extra Small Devices, Phones
 ------------------------ */
-@media only screen and (max-width: 480px) {
-	/* #Captions */
-	.slide__caption__title {
-		font-size: 2em;
-		line-height: 1.25em;
-	}
-	.slide__caption__subtitle {
-		line-height: 1.15384615em;
-	}
-	.slide__caption__text {
-		font-size: 1.375em;
-		line-height: 1.13636364em;
-	}
-
-	/* #Controls */
-	.prev, .next {
-		font-size: 2em;
-	}
-}
 
 /* ------------------------
 #Display 4", iPhone 5s portrait
 ------------------------ */
-@media only screen and (max-width: 320px) {
-	/* #Controls */
-	.prev, .next {
-		font-size: 1.5em;
-	}
-}
+
+
 
 /* =======================
 #Hacks & Fixes
@@ -972,6 +933,14 @@ body {
     color: #999;
     margin-top: 10px;
 }
+.step-container {
+    display: flex;
+}
+
+.step {
+    flex: 1;
+}
+
 \***상영정보***\\
 .mvie5_4 .schedule {position:relative; margin-top:53px;}
 .mvie5_4 .schedule > div {position:relative; border-top:2px solid #d9d9d9;}
