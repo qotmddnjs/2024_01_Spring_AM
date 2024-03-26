@@ -25,18 +25,19 @@
 		</dependency>
 
 		<!-- Selenium Java -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.11.0</version>
-		</dependency>
-		<!--
-		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v86 -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-devtools-v86</artifactId>
-			<version>4.0.0-beta-2</version>
-		</dependency>
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+     <!-- Use a compatible version of Selenium -->
+</dependency>
+
+<!-- Selenium DevTools -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-devtools-v122</artifactId>
+    <version>4.18.1</version> <!-- Adjust the version accordingly -->
+</dependency>
+
 
 
 		<!-- WebDriver Manager -->

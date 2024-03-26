@@ -36,6 +36,7 @@ public class GenFileController {
 	@Autowired
 	private GenFileService genFileService;
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping("/common/genFile/doUpload")
 	@ResponseBody
 	public ResultData doUpload(@RequestParam Map<String, Object> param, MultipartRequest multipartRequest) {

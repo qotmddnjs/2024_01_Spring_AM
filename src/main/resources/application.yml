@@ -19,3 +19,4 @@ mybatis:
   type-aliases-package: com.example.demo.vo
 custom:
   genFileDirPath: C:\work\sts-4.19.1.RELEASE-workspace2\demo\images
+  
