@@ -22,7 +22,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-<body class="mainbody">
+<body class="mainbody" style=" background: black;">
 
 	<hr style="border-top: 3px solid white;" />
 	<div class="navbar1" style="display: flex; justify-content: center;">
@@ -48,216 +48,119 @@
 
 
 	<hr style="border-top: 3px solid white;" />
-	<!-- <div class="mainback">
-    div class="mainback">
-    <div class="container">
-        <div class="slider">
-            <div class="slides">
-                이미지가 삽입될 div
-            </div>
-        </div>
-    </div>
-</div>
-
-수정된 자바스크립트 코드
-<script>
-    // 새로운 이미지 URL 배열
-    var newImageUrls = [
-        "이미지1.jpg",
-        "이미지2.jpg",
-        "이미지3.jpg",
-        // 추가 이미지 URL들...
-    ];
-
-    // 슬라이더에 이미지를 추가하는 함수
-    function addImagesToSlider() {
-        var slidesContainer = document.querySelector(".slider .slides");
-        newImageUrls.forEach(function(imageUrl) {
-            var slide = document.createElement("div");
-            slide.className = "slides__img";
-            var filter = document.createElement("div");
-            filter.className = "slides__img__filter";
-            var image = document.createElement("img");
-            image.src = imageUrl;
-            slide.appendChild(filter);
-            slide.appendChild(image);
-            slidesContainer.appendChild(slide);
-        });
+	
+	<title>순위</title>
+<style type="text/css">
+    /* 박스오피스 테이블의 텍스트 색상을 흰색으로 변경 */
+    .wrap table tbody tr td {
+        color: white;
     }
+    .ofice{
+    color: white;
+    margin-left: 1050px;
+    
+    }
+    .white-text {
+        color: white;
+    }
+     .wrap {
+        float: right; /* 테이블을 오른쪽으로 이동 */
+        width: 50%; /* 테이블의 너비를 50%로 설정 */
+    }
+</style>
+<script type="text/javascript" >
 
-    // 페이지 로드 시 이미지를 슬라이더에 추가
-    window.addEventListener("load", addImagesToSlider);
+// 조회할 날짜를 계산
+	var dt = new Date();
+
+	var m = dt.getMonth() + 1;
+	if (m < 10) {
+		var month = "0" + m;
+	} else {
+		var month = m + "";
+	}
+
+	var d = dt.getDate() - 1;
+	if (d < 10) {
+		var day = "0" + d;
+	} else {
+		var day = d + "";
+	}
+
+	var y = dt.getFullYear();
+	var year = y + "";
+
+	var result = year + month + day;
+	$(function() {
+		$.ajax({
+			//"키입력" 부분에 발급받은 키를 입력
+			//&itemPerPage: 1-10위 까지의 데이터가 출력되도록 설정
+					url : "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.xml?key=edf2f390fd84d8a500bfd4f6c2536a47&targetDt="
+							+ result + "&itemPerPage=10",
+					dataType : "xml",
+					success : function(data) {
+						var $data = $(data)
+								.find("boxOfficeResult>dailyBoxOfficeList>dailyBoxOffice");
+						//데이터를 테이블 구조에 저장. html의 table태그, class는 table로 하여 부트스트랩 적용
+						if ($data.length > 0) {
+							var table = $("<table/>").attr("class", "table");
+							//<table>안에 테이블의 컬럼 타이틀 부분인 thead 태그
+							var thead = $("<thead/>").append($("<tr/>"))
+									.append(
+											//추출하고자 하는 컬럼들의 타이틀 정의
+											$("<th/>").html("&nbsp;순위"),
+											$("<th/>").html("&nbsp;&nbsp;영화 제목"),
+											$("<th/>").html("&nbsp;&nbsp;영화 개봉일"),
+											$("<th/>").html("&nbsp;&nbsp;누적 매출액"),
+											$("<th/>").html("&nbsp;&nbsp;누적 관객수"));
+							var tbody = $("<tbody/>");
+							$.each($data, function(i, o) {
+
+								//오픈 API에 정의된 변수와 내가 정의한 변수 데이터 파싱
+								var $rank = $(o).find("rank").text(); // 순위
+								var $movieNm = $(o).find("movieNm").text(); //영화명
+								var $openDt = $(o).find("openDt").text();// 영화 개봉일
+								var $salesAcc = $(o).find("salesAcc").text();//누적 매출액
+								var $audiAcc = $(o).find("audiAcc").text(); //누적 관객수
+								
+								//<tbody><tr><td>태그안에 파싱하여 추출된 데이터 넣기
+								var row = $("<tr/>").addClass("white-text").append(
+										
+										$("<td/>").text($rank),
+										$("<td/>").text($movieNm),
+										$("<td/>").text($openDt),
+										$("<td/>").text($salesAcc),
+										$("<td/>").text($audiAcc));
+
+								tbody.append(row);
+
+							});// end of each 
+
+							table.append(thead);
+							table.append(tbody);
+							$(".wrap").append(table);
+						}
+					},
+					//에러 발생시 "실시간 박스오피스 로딩중"메시지가 뜨도록 한다.
+					error : function() {
+						alert("실시간 박스오피스 로딩중...");
+					}
+				});
+	});
 </script>
 
+<!-- 박스오피스 테이블에 마우스를 올렸을때 hover효과 -->
+<style type="text/css">
+tbody>tr>td:hover{
+	background:#ccc;cursor;
+}
+</style>
+</head>
 
+<h3 class = "ofice">실시간 박스오피스</h3>
+	<div class="wrap contaner"></div>
 
-
-	<script>
-		/**
-		 * @Author: Andrea Alba
-		 * @Date:   2018-03-14T21:25:14+01:00
-		 * @Email:  subjuliodesign [at] gmail.com
-		 * @Project: Responsive Slideshow with jQuery
-		 * @Filename: slideshow_final.js
-		 * @Last modified by:   Andrea Alba
-		 * @Last modified time: 2018-03-23T13:07:33+01:00
-		 * @Copyright: subjuliodesign
-		 */
-
-		$(document)
-				.ready(
-						function() {
-							//==================================
-							// #Slideshow with jQuery
-							//==================================
-
-							// id generator
-							function idGenerator() {
-								$(".slides__img").each(function(index, el) {
-									$(this).attr("id", "slide_" + index);
-								});
-								$(".dots__single").each(function(index, el) {
-									$(this).attr("id", "dot_" + index);
-								});
-							}
-
-							// id extractor
-							// at the end it focuses the current dot
-							function dotsFocus() {
-								$("[id^='dot_']").removeClass("dots__current");
-								var id = $(".slides__img:eq(1)").attr("id");
-								var n = Number(id.substr(-1));
-								if (n === 0) {
-									n = $(".slides__img").length;
-								}
-								$("#dot_" + (n - 1)).addClass("dots__current");
-							}
-
-							// slide up caption
-							function captionSlideUp(d, e) {
-								var $cap1 = $(".slide__caption:eq(1)");
-								$cap1.animate({
-									bottom : "20%",
-									opacity : 1
-								}, {
-									duration : d,
-									easing : e,
-									complete : dotsFocus()
-								});
-							}
-
-							// slide down caption
-							function captionSlideDown(d, e) {
-								$(".slide__caption").animate({
-									bottom : "5%",
-									opacity : 0
-								}, {
-									duration : d,
-									easing : e
-								});
-							}
-
-							// slide movement
-							function slideMove(t) {
-								if (t === "prev") {
-									return $(".slides__img").first().before(
-											$(".slides__img").last());
-								}
-								if (t === "next") {
-									return $(".slides__img").last().after(
-											$(".slides__img").first());
-								}
-							}
-
-							// slide images
-							function slideIt(l, d, e, t) {
-								var $slides = $(".slides");
-								captionSlideDown(150, "linear");
-								$slides.animate({
-									left : l
-								}, {
-									duration : d,
-									easing : e,
-									complete : function() {
-										$slides.css("left", "-100%");
-										slideMove(t);
-										captionSlideUp(1700, "swing");
-									}
-								});
-							}
-
-							// slide with dots
-							function dotsControl(d, e) {
-								$(".dots__single")
-										.click(
-												function() {
-													var currentId = parseInt($(
-															".dots__current")
-															.attr("id").substr(
-																	-1));
-													var clickId = parseInt($(
-															this).attr("id")
-															.substr(-1));
-													var max = $(".dots__single").length - 1;
-													var half = Math
-															.floor($(".dots__single").length / 2);
-													var diff;
-													if (currentId > clickId) {
-														diff = currentId
-																- clickId;
-														if (diff === max) {
-															diff = 1;
-															l = "-200%";
-															t = "next";
-														} else if (diff <= half) {
-															l = "0%";
-															t = "prev";
-														} else {
-															diff--;
-															l = "-200%";
-															t = "next";
-														}
-													}
-													if (currentId < clickId) {
-														diff = clickId
-																- currentId;
-														if (diff === max) {
-															diff = 1;
-															l = "0%";
-															t = "prev";
-														} else if (diff <= half) {
-															l = "-200%";
-															t = "next";
-														} else {
-															diff--;
-															l = "0%";
-															t = "prev";
-														}
-													}
-													for (var i = 0; i < diff; i++) {
-														slideIt(l, d, e, t);
-													}
-												});
-							}
-
-							// slideshow
-							function slideShow(d, e) {
-								$("#prev").click(function() {
-									var t = $(this).attr("id");
-									slideIt("0%", d, e, t);
-								});
-								$("#next").click(function() {
-									var t = $(this).attr("id");
-									slideIt("-200%", d, e, t);
-								});
-								dotsControl(d, e);
-							}
-
-							idGenerator();
-							captionSlideUp(1700, "swing");
-							slideShow(800, "swing");
-						});
-	</script> -->
+</html>
 	<%@ page import="java.util.List"%>
 	<!-- List 클래스 import -->
 	<%@ page import="com.example.demo.util.CgvDAO"%>
@@ -265,8 +168,7 @@
 	<%@ page import="com.example.demo.util.CgvService"%>
 <html>
 
-
-<body class="mainbody2" style="margin-top: 0; background: black;">
+<!-- <body class="mainbody2" style="margin-top:100px; background: black;"> -->
 	<div class="wrapper">
 
 		<div class="carousel">
@@ -360,17 +262,17 @@
 
  // 모든 이미지 요소에 너비와 높이를 적용합니다.
  imgElements.forEach(function(imgElement) {
-     imgElement.style.width = "500px"; // 너비를 200px로 설정합니다.
-     imgElement.style.height = "100%"; // 높이를 300px로 설정합니다.
+     imgElement.style.width = "300px"; // 너비를 200px로 설정합니다.
+     imgElement.style.height = "500px%"; // 높이를 300px로 설정합니다.
  });
 </script>
 
-</body>
-</html>
 
 
-</body>
-<div></div>
+
+
+
+
 
 
 
@@ -408,12 +310,11 @@
 			});
 		});
 	</script>
-</body>
 
 
 <hr style="border-top: 3px solid white;" />
 
-</body>
+
 <div class="board-container">
 	<div class="board">
 		<h2>인기 영화</h2>

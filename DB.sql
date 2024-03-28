@@ -529,9 +529,20 @@ CREATE TABLE movies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(250),
     image VARCHAR(250),
-    genre VARCHAR(250)
+    genre VARCHAR(250),
+    detail VARCHAR(250),
+    director VARCHAR(250),
+    actors VARCHAR(250)
+);
+CREATE TABLE box_office (
+    RANK INT,
+    movie_name VARCHAR(255),
+    open_date DATE,
+    sales_acc INT,
+    audience_acc INT
 );
 
+SELECT * FROM box_office;
 SELECT * FROM  movies;
 CREATE DATABASE crawl_data DEFAULT CHARACTER SET utf8;
 CREATE USER crawl_usr IDENTIFIED BY 'Test001';
@@ -539,6 +550,3 @@ GRANT ALL ON crawl_data.* TO crawl_usr;
 
 SELECT USER();
 SELECT DATABASE();
-
-
-
