@@ -58,6 +58,7 @@
     .ofice{
     color: white;
     margin-left: 1050px;
+    margin-top:50px;
     
     }
     .white-text {
@@ -147,6 +148,51 @@
 					}
 				});
 	});
+	// 영화 제목을 사용하여 TMDb API에서 해당하는 영화의 정보를 가져오는 함수
+	function searchMoviePoster(movieTitle) {
+	    var apiKey = "8bdb692a4e0f1be965aefd338b2787e4"; // 본인의 TMDb API 키로 대체
+	    var searchUrl = "https://api.themoviedb.org/3/search/movie";
+	    
+	    $.ajax({
+	        url: searchUrl,
+	        data: {
+	            api_key: apiKey,
+	            query: movieTitle
+	        },
+	        dataType: "json",
+	        success: function(data) {
+	            if (data.results && data.results.length > 0) {
+	                // 검색 결과에서 첫 번째 영화의 포스터 이미지 가져오기
+	                var posterPath = data.results[0].poster_path;
+	                if (posterPath) {
+	                    // 포스터 이미지 URL 생성
+	                    var posterUrl = "https://image.tmdb.org/t/p/w500" + posterPath;
+	                    // 가져온 이미지 URL을 사용하여 포스터를 표시하는 함수 호출
+	                    showMoviePoster(posterUrl);
+	                }
+	            }
+	        },
+	        error: function() {
+	            console.error("Error searching movie poster.");
+	        }
+	    });
+	}
+
+	// 가져온 포스터 이미지 URL을 사용하여 포스터를 표시하는 함수
+	function showMoviePoster(posterUrl) {
+	    // 이미지 요소를 생성합니다.
+	    var img = document.createElement('img');
+	    // 생성한 이미지 요소에 포스터 이미지 URL을 설정합니다.
+	    img.src = posterUrl;
+
+	    // 이미지의 스타일을 설정합니다.
+	    img.style.width = '200px'; // 이미지의 너비를 200px로 설정합니다. 원하는 크기로 수정하세요.
+	    img.style.height = '300px'; // 이미지의 높이를 300px로 설정합니다. 원하는 크기로 수정하세요.
+	    
+	    // 이미지를 .wrap 요소 안에 추가합니다.
+	    $(".wrap").append(img);
+	}
+
 </script>
 
 <!-- 박스오피스 테이블에 마우스를 올렸을때 hover효과 -->
@@ -168,7 +214,7 @@ tbody>tr>td:hover{
 	<%@ page import="com.example.demo.util.CgvService"%>
 <html>
 
-<!-- <body class="mainbody2" style="margin-top:100px; background: black;"> -->
+<div style = "margin-top:600px;">
 	<div class="wrapper">
 
 		<div class="carousel">
@@ -205,7 +251,7 @@ tbody>tr>td:hover{
 		</div>
 	</div>
 </body>
-
+</div>
 
 
 <script>
@@ -597,7 +643,7 @@ tbody>tr>td:hover{
 }
 </style>
 
-
+<div>
 		<div class="map_wrap">
 			<div id="map" style="width: 800px; height: 500px; position: relative; overflow: hidden;"></div>
 
@@ -614,6 +660,8 @@ tbody>tr>td:hover{
 				<ul id="placesList"></ul>
 				<div id="pagination"></div>
 			</div>
+		</div>
+		
 		</div>
 
 		<script type="text/javascript"
@@ -879,6 +927,139 @@ function findPath(place) {
 addListClickEvent();
 
 </script>
+
+<div style = "color:white">
+ <title>영화 상영관 선택</title>
+
+
+    <label for="region">광역 (Region):</label>
+    <select id="region">
+        <option value="">지역을 선택하세요</option>
+        <option value="서울시">서울시</option>
+        <option value="경기도">경기도</option>
+        <option value="강원도">강원도</option>
+        <!-- 다른 지역 옵션들 추가 -->
+    </select>
+
+    <label for="district">기초 (District):</label>
+    <select id="district" disabled>
+        <option value="">지역을 선택하세요</option>
+        <!-- 선택된 지역에 따라 동적으로 옵션들이 추가될 것입니다. -->
+    </select>
+
+    <label for="theater">영화상영관(극장):</label>
+    <select id="theater" disabled>
+        <option value="">지역을 선택하세요</option>
+        <!-- 선택된 구역에 따라 동적으로 옵션들이 추가될 것입니다. -->
+    </select>
+
+    <label for="date">날짜 (Date):</label>
+    <input type="date" id="date" disabled>
+    </div>
+
+    <script>
+        const regionSelect = document.getElementById('region');
+        const districtSelect = document.getElementById('district');
+        const theaterSelect = document.getElementById('theater');
+        const dateInput = document.getElementById('date');
+
+        regionSelect.addEventListener('change', function() {
+            // 선택된 지역에 맞게 구역 목록을 가져오는 함수 호출
+            // 예를 들어, 선택된 지역에 따라 서버로부터 해당 지역의 구역 목록을 가져올 수 있습니다.
+            const selectedRegion = this.value;
+
+            // 구역 선택을 비활성화하고 초기화
+            districtSelect.disabled = true;
+            theaterSelect.disabled = true;
+            dateInput.disabled = true;
+            districtSelect.innerHTML = '<option value="">지역을 선택하세요</option>';
+            theaterSelect.innerHTML = '<option value="">지역을 선택하세요</option>';
+
+            // 선택된 지역에 따라 동적으로 구역 옵션을 추가하는 함수 호출
+            // 이 함수는 서버로부터 해당 지역의 구역 목록을 가져와서 옵션을 추가하는 역할을 합니다.
+            populateDistricts(selectedRegion);
+        });
+
+        districtSelect.addEventListener('change', function() {
+            // 선택된 구역에 맞게 영화 상영관 목록을 가져오는 함수 호출
+            const selectedDistrict = this.value;
+
+            // 영화 상영관 선택을 비활성화하고 초기화
+            theaterSelect.disabled = true;
+            dateInput.disabled = true;
+            theaterSelect.innerHTML = '<option value="">지역을 선택하세요</option>';
+
+            // 선택된 구역에 따라 동적으로 영화 상영관 옵션을 추가하는 함수 호출
+            populateTheaters(selectedDistrict);
+        });
+
+        theaterSelect.addEventListener('change', function() {
+            // 영화 상영일 선택 활성화
+            dateInput.disabled = false;
+        });
+
+        function populateDistricts(region) {
+            // 서버로부터 해당 지역의 구역 목록을 가져와서 옵션을 추가하는 로직을 구현
+            // 이 예시에서는 하드코딩하여 각 지역에 따른 구역을 정의
+            let districts;
+            switch (region) {
+                case '서울시':
+                    districts = ['강남구', '강동구', '강북구', '강서구', '서초구', '송파구', '영등포구', '용산구', '중구', '중랑구'];
+                    break;
+                case '경기도':
+                    districts = ['수원시', '성남시', '의정부시', '안양시', '부천시', '광명시', '평택시', '동두천시', '안산시', '고양시'];
+                    break;
+                case '강원도':
+                    districts = ['춘천시', '원주시', '강릉시', '동해시', '태백시', '속초시', '삼척시', '홍천시', '횡성군', '영월군'];
+                    break;
+                default:
+                    districts = [];
+            }
+
+            // 옵션 추가
+            districts.forEach(function(district) {
+                const option = document.createElement('option');
+                option.textContent = district;
+                option.value = district;
+                districtSelect.appendChild(option);
+            });
+
+            // 구역 선택 활성화
+            districtSelect.disabled = false;
+        }
+
+        function populateTheaters(district) {
+            // 서버로부터 해당 구역의 영화 상영관 목록을 가져와서 옵션을 추가하는 로직을 구현
+            // 이 예시에서는 하드코딩하여 각 구역에 따른 영화 상영관을 정의
+            let theaters;
+            switch (district) {
+                case '강남구':
+                    theaters = ['강남 메가박스', '강남 CGV', '강남 롯데시네마'];
+                    break;
+                case '강동구':
+                    theaters = ['강동 메가박스', '강동 CGV', '강동 롯데시네마'];
+                    break;
+                // 다른 구역들에 대한 영화 상영관 목록 추가
+                default:
+                    theaters = [];
+            }
+
+            // 옵션 추가
+            theaters.forEach(function(theater) {
+                const option = document.createElement('option');
+                option.textContent = theater;
+                option.value = theater;
+                theaterSelect.appendChild(option);
+            });
+
+            // 영화 상영관 선택 활성화
+            theaterSelect.disabled = false;
+        }
+    </script>
+
+
+
+
 
 
 
