@@ -22,7 +22,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-<body class="mainbody" style=" background: black;">
+<body class="mainbody" style="background: black;">
 
 	<hr style="border-top: 3px solid white;" />
 	<div class="navbar1" style="display: flex; justify-content: center;">
@@ -48,28 +48,30 @@
 
 
 	<hr style="border-top: 3px solid white;" />
-	
-	<title>순위</title>
-<style type="text/css">
-    /* 박스오피스 테이블의 텍스트 색상을 흰색으로 변경 */
-    .wrap table tbody tr td {
-        color: white;
-    }
-    .ofice{
-    color: white;
-    margin-left: 1050px;
-    margin-top:50px;
-    
-    }
-    .white-text {
-        color: white;
-    }
-     .wrap {
-        float: right; /* 테이블을 오른쪽으로 이동 */
-        width: 50%; /* 테이블의 너비를 50%로 설정 */
-    }
+
+	<title>Today 박스오피스</title>
+	<style type="text/css">
+/* 박스오피스 테이블의 텍스트 색상을 흰색으로 변경 */
+.wrap table tbody tr td {
+	color: white;
+}
+
+.ofice {
+	color: white;
+	margin-left: 1050px;
+	margin-top: 50px;
+}
+
+.white-text {
+	color: white;
+}
+
+.wrap {
+	float: right; /* 테이블을 오른쪽으로 이동 */
+	width: 50%; /* 테이블의 너비를 50%로 설정 */
+}
 </style>
-<script type="text/javascript" >
+	<script type="text/javascript">
 
 // 조회할 날짜를 계산
 	var dt = new Date();
@@ -195,26 +197,27 @@
 
 </script>
 
-<!-- 박스오피스 테이블에 마우스를 올렸을때 hover효과 -->
-<style type="text/css">
-tbody>tr>td:hover{
-	background:#ccc;cursor;
+	<!-- 박스오피스 테이블에 마우스를 올렸을때 hover효과 -->
+	<style type="text/css">
+tbody>tr>td:hover {
+	background: #ccc;
+	cursor;
 }
 </style>
 </head>
 
-<h3 class = "ofice">실시간 박스오피스</h3>
-	<div class="wrap contaner"></div>
+<h3 class="ofice">실시간 박스오피스</h3>
+<div class="wrap contaner"></div>
 
 </html>
-	<%@ page import="java.util.List"%>
-	<!-- List 클래스 import -->
-	<%@ page import="com.example.demo.util.CgvDAO"%>
-	<%@ page import="com.example.demo.vo.CgvVO"%>
-	<%@ page import="com.example.demo.util.CgvService"%>
+<%@ page import="java.util.List"%>
+<!-- List 클래스 import -->
+<%@ page import="com.example.demo.util.CgvDAO"%>
+<%@ page import="com.example.demo.vo.CgvVO"%>
+<%@ page import="com.example.demo.util.CgvService"%>
 <html>
 
-<div style = "margin-top:600px;">
+<div style="margin-top: 600px;">
 	<div class="wrapper">
 
 		<div class="carousel">
@@ -250,10 +253,8 @@ tbody>tr>td:hover{
 			</div>
 		</div>
 	</div>
-</body>
+	</body>
 </div>
-
-
 <script>
     // 영화 목록을 가져와서 JavaScript 배열로 변환
     var movieList = [
@@ -312,16 +313,6 @@ tbody>tr>td:hover{
      imgElement.style.height = "500px%"; // 높이를 300px로 설정합니다.
  });
 </script>
-
-
-
-
-
-
-
-
-
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script>
@@ -356,11 +347,7 @@ tbody>tr>td:hover{
 			});
 		});
 	</script>
-
-
 <hr style="border-top: 3px solid white;" />
-
-
 <div class="board-container">
 	<div class="board">
 		<h2>인기 영화</h2>
@@ -380,20 +367,6 @@ tbody>tr>td:hover{
 		</ul>
 	</div>
 </div>
-
-<div class="crawl">
-	<div id="wrap" class="mvie5_4">
-
-
-
-
-
-
-
-
-
-
-
 		<script type="text/javascript">
 	function mainTopMenuTopView(divName) {
 		var frm = document.getElementById(divName);
@@ -456,212 +429,28 @@ tbody>tr>td:hover{
 
 		<title>영화관 위치</title>
 		<style>
-.map_wrap, .map_wrap * {
-	margin: 0;
-	padding: 0;
-	font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
-	font-size: 12px;
-}
 
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
-	color: #000;
-	text-decoration: none;
-}
-
-.map_wrap {
-	position: relative;
-	width: 100%;
-	height: 400px;
-}
-
-#menu_wrap {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	width: 250px;
-	margin: 10px 0 30px 10px;
-	padding: 5px;
-	overflow-y: auto;
-	background: rgba(255, 255, 255, 0.7);
-	z-index: 1;
-	font-size: 12px;
-	border-radius: 10px;
-}
-
-.bg_white {
-	background: #fff;
-}
-
-#menu_wrap hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 2px solid #5F5F5F;
-	margin: 3px 0;
-}
-
-#menu_wrap .option {
-	text-align: center;
-}
-
-#menu_wrap .option p {
-	margin: 10px 0;
-}
-
-#menu_wrap .option button {
-	margin-left: 5px;
-}
-
-#placesList li {
-	list-style: none;
-}
-
-#placesList .item {
-	position: relative;
-	border-bottom: 1px solid #888;
-	overflow: hidden;
-	cursor: pointer;
-	min-height: 65px;
-}
-
-#placesList .item span {
-	display: block;
-	margin-top: 4px;
-}
-
-#placesList .item h5, #placesList .item .info {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-#placesList .item .info {
-	padding: 10px 0 10px 55px;
-}
-
-#placesList .info .gray {
-	color: #8a8a8a;
-}
-
-#placesList .info .jibun {
-	padding-left: 26px;
-	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
-		no-repeat;
-}
-
-#placesList .info .tel {
-	color: #009900;
-}
-
-#placesList .item .markerbg {
-	float: left;
-	position: absolute;
-	width: 36px;
-	height: 37px;
-	margin: 10px 0 0 10px;
-	background:
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
-		no-repeat;
-}
-
-#placesList .item .marker_1 {
-	background-position: 0 -10px;
-}
-
-#placesList .item .marker_2 {
-	background-position: 0 -56px;
-}
-
-#placesList .item .marker_3 {
-	background-position: 0 -102px
-}
-
-#placesList .item .marker_4 {
-	background-position: 0 -148px;
-}
-
-#placesList .item .marker_5 {
-	background-position: 0 -194px;
-}
-
-#placesList .item .marker_6 {
-	background-position: 0 -240px;
-}
-
-#placesList .item .marker_7 {
-	background-position: 0 -286px;
-}
-
-#placesList .item .marker_8 {
-	background-position: 0 -332px;
-}
-
-#placesList .item .marker_9 {
-	background-position: 0 -378px;
-}
-
-#placesList .item .marker_10 {
-	background-position: 0 -423px;
-}
-
-#placesList .item .marker_11 {
-	background-position: 0 -470px;
-}
-
-#placesList .item .marker_12 {
-	background-position: 0 -516px;
-}
-
-#placesList .item .marker_13 {
-	background-position: 0 -562px;
-}
-
-#placesList .item .marker_14 {
-	background-position: 0 -608px;
-}
-
-#placesList .item .marker_15 {
-	background-position: 0 -654px;
-}
-
-#pagination {
-	margin: 10px auto;
-	text-align: center;
-}
-
-#pagination a {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-#pagination .on {
-	font-weight: bold;
-	cursor: default;
-	color: #777;
-}
 </style>
 
-<div>
-		<div class="map_wrap">
-			<div id="map" style="width: 800px; height: 500px; position: relative; overflow: hidden;"></div>
+		<div>
+			<div class="map_wrap">
+				<div id="map" style="width: 800px; height: 500px; position: relative; overflow: hidden; margin-top:30px; margin-left:250px;"></div>
 
-			<div id="menu_wrap" class="bg_white">
-				<div class="option">
-					<div>
-						<form onsubmit="searchPlaces(); return false;">
-							키워드 : <input type="text" value="대전 영화관" id="keyword" size="15">
-							<button type="submit">검색하기</button>
-						</form>
+				<div id="menu_wrap" class="bg_white">
+					<div class="option">
+						<div>
+							<form onsubmit="searchPlaces(); return false;">
+								키워드 : <input type="text" value="대전 영화관" id="keyword" size="15">
+								<button type="submit">검색하기</button>
+							</form>
+						</div>
 					</div>
+					<hr>
+					<ul id="placesList"></ul>
+					<div id="pagination"></div>
 				</div>
-				<hr>
-				<ul id="placesList"></ul>
-				<div id="pagination"></div>
 			</div>
-		</div>
-		
+
 		</div>
 
 		<script type="text/javascript"
@@ -887,175 +676,92 @@ function addListClickEvent() {
         }
     });
 }
-
-// 장소로부터 현재 위치까지의 경로를 찾아 표시하는 함수
-function findPath(place) {
-    if (navigator.geolocation) {
-        // 사용자의 현재 위치를 가져옵니다
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var startLat = position.coords.latitude;
-            var startLng = position.coords.longitude;
-            var startXy = new kakao.maps.LatLng(startLat, startLng);
-            var endXy = new kakao.maps.LatLng(place.y, place.x);
-            // 카카오맵의 길찾기 서비스를 이용하여 경로를 표시합니다
-            kakao.maps.services.Geocoder.coord2Address(startXy.getLng(), startXy.getLat(), function(startAddr, status) {
-                if (status === kakao.maps.services.Status.OK) {
-                    var startAddress = startAddr[0].address.address_name;
-                    var endName = place.place_name;
-                    var endAddress = place.address_name;
-                    var url = 'https://map.kakao.com/link/to/' + endName + ',' + place.y + ',' + place.x;
-                    var infoWindowContent = '<div style="padding:5px;">' +
-                        '<strong>' + endName + '</strong><br>' +
-                        '출발지: ' + startAddress + '<br>' +
-                        '도착지: ' + endAddress + '<br><br>' +
-                        '<a href="' + url + '" target="_blank">길찾기</a>' +
-                        '</div>';
-                    var infoWindow = new kakao.maps.InfoWindow({
-                        content: infoWindowContent,
-                        removable: true
-                    });
-                    infoWindow.open(map, new kakao.maps.LatLng(place.y, place.x));
-                }
-            });
-        });
-    } else {
-        alert('Geolocation이 지원되지 않습니다');
-    }
-}
-
 // 검색 결과 목록에 클릭 이벤트를 추가합니다
 addListClickEvent();
+</script>
+<style>
+    .schedule .step {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 네 개의 칸으로 구성된 그리드 */
+        gap: 10px; /* 칸 사이의 간격 */
+    }
+</style>
 
+<div class="schedule">
+    <div class="fl step1 on"><!-- 해당 단계일 때 .on 추가 -->
+        <strong>광역</strong>
+        <ul>
+            <li wideareacd="0105001" onclick="selectedWidearea(this, '0105001');">
+                <input type="radio" name="step1" id="step1_1" autocomplete="off">
+                <label for="step1_1">서울시</label>
+            </li>
+            <!-- 다른 지역 목록들 -->
+        </ul>
+    </div>
+    <div class="fl step2"><!-- 해당 단계일 때 .on 추가 -->
+        <strong>기초</strong>
+        <ul id="sBasareaCd"></ul>
+    </div>
+    <div class="fl step3"><!-- 해당 단계일 때 .on 추가 -->
+        <strong>영화상영관</strong>
+        <ul id="sTheaCd"></ul>
+    </div>
+    <div class="ovf step4"><!-- 해당 단계일 때 .on 추가 -->
+        <div class="date">
+            <p><strong>4월 3일</strong></p>
+            <a href="javascript:;" class="prev" id="previous"><span class="ico_comm">이전</span></a>
+            <a href="javascript:;" class="next" id="next"><span class="ico_comm">다음</span></a>
+        </div>
+        <ul id="schedule"></ul>
+    </div>
+    <a href="" class="btn_book">예매</a>
+</div>
+<script>
+    // 각 단계의 목록을 숨기는 함수
+    function hideAllSteps() {
+        var steps = document.querySelectorAll('.schedule .step');
+        steps.forEach(function(step) {
+            step.classList.remove('on');
+        });
+    }
+
+    // 각 단계의 목록을 보여주는 함수
+    function showStep(stepNumber) {
+        hideAllSteps();
+        var step = document.querySelector('.schedule .step.step' + stepNumber);
+        step.classList.add('on');
+    }
+
+    // 이전 버튼 클릭 시 이벤트 핸들러
+    document.getElementById('previous').addEventListener('click', function() {
+        var currentStep = document.querySelector('.schedule .step.on');
+        if (currentStep.previousElementSibling) {
+            currentStep.classList.remove('on');
+            currentStep.previousElementSibling.classList.add('on');
+        }
+    });
+
+    // 다음 버튼 클릭 시 이벤트 핸들러
+    document.getElementById('next').addEventListener('click', function() {
+        var currentStep = document.querySelector('.schedule .step.on');
+        if (currentStep.nextElementSibling) {
+            currentStep.classList.remove('on');
+            currentStep.nextElementSibling.classList.add('on');
+        }
+    });
+
+    // 각 단계 클릭 시 이벤트 핸들러
+    var stepLinks = document.querySelectorAll('.schedule .step strong');
+    stepLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            var stepNumber = this.parentElement.classList[1].replace('step', '');
+            showStep(stepNumber);
+        });
+    });
 </script>
 
-<div style = "color:white">
- <title>영화 상영관 선택</title>
 
 
-    <label for="region">광역 (Region):</label>
-    <select id="region">
-        <option value="">지역을 선택하세요</option>
-        <option value="서울시">서울시</option>
-        <option value="경기도">경기도</option>
-        <option value="강원도">강원도</option>
-        <!-- 다른 지역 옵션들 추가 -->
-    </select>
-
-    <label for="district">기초 (District):</label>
-    <select id="district" disabled>
-        <option value="">지역을 선택하세요</option>
-        <!-- 선택된 지역에 따라 동적으로 옵션들이 추가될 것입니다. -->
-    </select>
-
-    <label for="theater">영화상영관(극장):</label>
-    <select id="theater" disabled>
-        <option value="">지역을 선택하세요</option>
-        <!-- 선택된 구역에 따라 동적으로 옵션들이 추가될 것입니다. -->
-    </select>
-
-    <label for="date">날짜 (Date):</label>
-    <input type="date" id="date" disabled>
-    </div>
-
-    <script>
-        const regionSelect = document.getElementById('region');
-        const districtSelect = document.getElementById('district');
-        const theaterSelect = document.getElementById('theater');
-        const dateInput = document.getElementById('date');
-
-        regionSelect.addEventListener('change', function() {
-            // 선택된 지역에 맞게 구역 목록을 가져오는 함수 호출
-            // 예를 들어, 선택된 지역에 따라 서버로부터 해당 지역의 구역 목록을 가져올 수 있습니다.
-            const selectedRegion = this.value;
-
-            // 구역 선택을 비활성화하고 초기화
-            districtSelect.disabled = true;
-            theaterSelect.disabled = true;
-            dateInput.disabled = true;
-            districtSelect.innerHTML = '<option value="">지역을 선택하세요</option>';
-            theaterSelect.innerHTML = '<option value="">지역을 선택하세요</option>';
-
-            // 선택된 지역에 따라 동적으로 구역 옵션을 추가하는 함수 호출
-            // 이 함수는 서버로부터 해당 지역의 구역 목록을 가져와서 옵션을 추가하는 역할을 합니다.
-            populateDistricts(selectedRegion);
-        });
-
-        districtSelect.addEventListener('change', function() {
-            // 선택된 구역에 맞게 영화 상영관 목록을 가져오는 함수 호출
-            const selectedDistrict = this.value;
-
-            // 영화 상영관 선택을 비활성화하고 초기화
-            theaterSelect.disabled = true;
-            dateInput.disabled = true;
-            theaterSelect.innerHTML = '<option value="">지역을 선택하세요</option>';
-
-            // 선택된 구역에 따라 동적으로 영화 상영관 옵션을 추가하는 함수 호출
-            populateTheaters(selectedDistrict);
-        });
-
-        theaterSelect.addEventListener('change', function() {
-            // 영화 상영일 선택 활성화
-            dateInput.disabled = false;
-        });
-
-        function populateDistricts(region) {
-            // 서버로부터 해당 지역의 구역 목록을 가져와서 옵션을 추가하는 로직을 구현
-            // 이 예시에서는 하드코딩하여 각 지역에 따른 구역을 정의
-            let districts;
-            switch (region) {
-                case '서울시':
-                    districts = ['강남구', '강동구', '강북구', '강서구', '서초구', '송파구', '영등포구', '용산구', '중구', '중랑구'];
-                    break;
-                case '경기도':
-                    districts = ['수원시', '성남시', '의정부시', '안양시', '부천시', '광명시', '평택시', '동두천시', '안산시', '고양시'];
-                    break;
-                case '강원도':
-                    districts = ['춘천시', '원주시', '강릉시', '동해시', '태백시', '속초시', '삼척시', '홍천시', '횡성군', '영월군'];
-                    break;
-                default:
-                    districts = [];
-            }
-
-            // 옵션 추가
-            districts.forEach(function(district) {
-                const option = document.createElement('option');
-                option.textContent = district;
-                option.value = district;
-                districtSelect.appendChild(option);
-            });
-
-            // 구역 선택 활성화
-            districtSelect.disabled = false;
-        }
-
-        function populateTheaters(district) {
-            // 서버로부터 해당 구역의 영화 상영관 목록을 가져와서 옵션을 추가하는 로직을 구현
-            // 이 예시에서는 하드코딩하여 각 구역에 따른 영화 상영관을 정의
-            let theaters;
-            switch (district) {
-                case '강남구':
-                    theaters = ['강남 메가박스', '강남 CGV', '강남 롯데시네마'];
-                    break;
-                case '강동구':
-                    theaters = ['강동 메가박스', '강동 CGV', '강동 롯데시네마'];
-                    break;
-                // 다른 구역들에 대한 영화 상영관 목록 추가
-                default:
-                    theaters = [];
-            }
-
-            // 옵션 추가
-            theaters.forEach(function(theater) {
-                const option = document.createElement('option');
-                option.textContent = theater;
-                option.value = theater;
-                theaterSelect.appendChild(option);
-            });
-
-            // 영화 상영관 선택 활성화
-            theaterSelect.disabled = false;
-        }
-    </script>
 
 
 

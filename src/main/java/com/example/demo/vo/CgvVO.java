@@ -8,6 +8,7 @@ public class CgvVO {
     private String actors; // 배우 정보 추가
     private int bookcnt;
     private String detail;
+    private String stillcut; // 스틸컷 이미지 URL 추가
 
     public String getGenre() {
         return genre;
@@ -65,5 +66,14 @@ public class CgvVO {
 
     public void setActors(String actors) {
         this.actors = actors;
+    }
+
+    // 스틸컷 이미지 URL 설정
+    public String getStillcut() {
+        return stillcut;
+    }
+
+    public void setStillcut(String stillcut) {
+        this.stillcut = stillcut;
     }
 }

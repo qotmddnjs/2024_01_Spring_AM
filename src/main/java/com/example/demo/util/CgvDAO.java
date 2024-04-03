@@ -23,7 +23,7 @@ public class CgvDAO {
         PreparedStatement pstmt = null;
         try {
             // SQL 문을 준비하여 실행
-            String sql = "INSERT INTO movies (title, image, genre, director, actors, detail) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO movies (title, image, genre, director, actors, detail, stillcut) VALUES (?, ?, ?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, vo.getTitle());
             pstmt.setString(2, vo.getImage());
@@ -31,6 +31,7 @@ public class CgvDAO {
             pstmt.setString(4, vo.getDirector()); // 감독 정보 삽입
             pstmt.setString(5, vo.getActors()); // 배우 정보 삽입
             pstmt.setString(6, vo.getDetail()); // 디테일 정보 삽입
+            pstmt.setString(7, vo.getStillcut()); // 스틸컷 이미지 URL 삽입
             pstmt.executeUpdate();
 
             System.out.println("Inserted movie: " + vo.getTitle());
@@ -55,7 +56,7 @@ public class CgvDAO {
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT title, image, genre, director, actors, detail FROM movies"; // 디테일 정보도 함께 가져오기
+            String sql = "SELECT title, image, genre, director, actors, detail, stillcut FROM movies"; // 스틸컷 정보도 함께 가져오기
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
@@ -67,6 +68,7 @@ public class CgvDAO {
                 movie.setDirector(rs.getString("director")); // 감독 정보 설정
                 movie.setActors(rs.getString("actors")); // 배우 정보 설정
                 movie.setDetail(rs.getString("detail")); // 디테일 정보 설정
+                movie.setStillcut(rs.getString("stillcut")); // 스틸컷 이미지 URL 설정
                 movies.add(movie);
             }
         } catch (SQLException e) {

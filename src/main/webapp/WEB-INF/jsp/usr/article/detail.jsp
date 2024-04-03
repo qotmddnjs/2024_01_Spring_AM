@@ -433,7 +433,13 @@ function doModifyReply(replyId) {
                 <p><strong>상세:</strong> <%= movie.getDetail() %></p> <!-- 상세 정보 추가 -->
                 </div>
             </div>
-            <div style="clear: both;"></div>
+            <!-- 스틸컷 이미지 -->
+            <div style="clear: both; margin-left:400px;">
+                <h2 style="font-size: 20px; margin-top: 20px;">스틸컷 이미지</h2>
+                <div id="stillcutGallery" style="display: flex; flex-wrap: wrap;">
+                    <!-- 이 곳에 스틸컷 이미지를 표시할 영역을 만들 것입니다. -->
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -441,6 +447,24 @@ function doModifyReply(replyId) {
 document.addEventListener("DOMContentLoaded", function () {
     var movieIndex = <%= index %>; // JSP 변수로부터 영화의 인덱스를 가져옴
 
+    // 스틸컷 이미지 로드 및 표시
+    var stillcutGallery = document.getElementById("stillcutGallery");
+    var stillcuts = loadStillcuts(movieIndex);
+    stillcuts.forEach(function (stillcutUrl) {
+        var img = document.createElement("img");
+        img.src = stillcutUrl;
+        img.style.width = "200px";
+        img.style.height = "auto";
+        img.style.margin = "5px";
+        stillcutGallery.appendChild(img);
+    });
+
+    function loadStillcuts(movieIndex) {
+        // 여기에서 해당 인덱스의 영화에 대한 스틸컷 이미지 URL을 가져오는 코드를 작성하세요.
+        // 예를 들어 AJAX를 사용하여 서버로부터 이미지 URL을 가져올 수 있습니다.
+        // 가져온 이미지 URL을 배열로 반환합니다.
+    }
+});
     // 댓글 목록 로드 및 표시
     var commentList = document.getElementById("commentList");
     var comments = loadComments(movieIndex);

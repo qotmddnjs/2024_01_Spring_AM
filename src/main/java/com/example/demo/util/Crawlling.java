@@ -16,7 +16,6 @@ import com.example.demo.vo.CgvVO;
 
 public class Crawlling {
     public static void sample() {
-
         String cgvUrl = "http://www.cgv.co.kr/movies/?lt=1&ft=0"; // 크롤링하려는 페이지의 url
         Document doc = null; // Document 객체 생성
         URL url = null; // URL 객체생성
@@ -25,7 +24,6 @@ public class Crawlling {
 
         try {
             doc = Jsoup.connect(cgvUrl).get(); // Jsoup 클래스로 url 연결하여 정보를 doc에 담음
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +56,6 @@ public class Crawlling {
                 N++;
                 while (true) {
                     int data = in.read(); // in 객체로 해당 이미지를 읽어들임
-
                     if (data == -1) { // 더이상 읽을것이 없으면 멈춤
                         break;
                     }
@@ -78,13 +75,11 @@ public class Crawlling {
                 Document doc2 = null;
                 try {
                     doc2 = Jsoup.connect(cgvUrl2).get(); // 상세정보 페이지에 연결하여 정보를 담음
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
                 // 감독, 배우, 장르 등등 정보가 있는 요소 선택
-             // 감독, 배우, 장르 등등 정보가 있는 요소 선택
                 Elements categoryElements = doc2.select("div.spec");
                 for (Element categoryElement : categoryElements) {
                     // categoryElement의 내용 출력
@@ -113,12 +108,20 @@ public class Crawlling {
                     }
                 }
 
+              
+             // 스틸컷 이미지 가져오기
+                Elements stillcutElements = doc2.select("div.item-wrap div.item img[data-src]");
+                for (Element stillcutElement : stillcutElements) {
+                    String stillcutUrl = stillcutElement.attr("data-src");
+                    System.out.println("스틸컷 이미지 URL: " + stillcutUrl);
+                }
+
+
 
                 // 영화소개 및 상세정보 부분
                 String detail = doc2.select("div.sect-story-movie").text(); // 첫 번째 p 태그 선택
                 System.out.println("상세정보: " + detail);
                 vo.setDetail(detail);
-
 
                 vo.setTitle(title2); // 객체에 영화제목 입력
                 vo.setImage(img2); // 이미지 입력
