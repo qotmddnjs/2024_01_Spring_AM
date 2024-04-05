@@ -447,24 +447,40 @@ function doModifyReply(replyId) {
 document.addEventListener("DOMContentLoaded", function () {
     var movieIndex = <%= index %>; // JSP 변수로부터 영화의 인덱스를 가져옴
 
-    // 스틸컷 이미지 로드 및 표시
-    var stillcutGallery = document.getElementById("stillcutGallery");
-    var stillcuts = loadStillcuts(movieIndex);
-    stillcuts.forEach(function (stillcutUrl) {
-        var img = document.createElement("img");
-        img.src = stillcutUrl;
-        img.style.width = "200px";
-        img.style.height = "auto";
-        img.style.margin = "5px";
-        stillcutGallery.appendChild(img);
-    });
-
     function loadStillcuts(movieIndex) {
-        // 여기에서 해당 인덱스의 영화에 대한 스틸컷 이미지 URL을 가져오는 코드를 작성하세요.
-        // 예를 들어 AJAX를 사용하여 서버로부터 이미지 URL을 가져올 수 있습니다.
-        // 가져온 이미지 URL을 배열로 반환합니다.
+        var stillcutUrls = []; // 스틸컷 이미지 URL을 저장할 배열
+
+        // AJAX 요청을 보냅니다.
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/getStillcuts?index=' + movieIndex, true); // 서버에 영화 인덱스를 전달하여 이미지 URL을 가져옵니다.
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // 요청이 성공하고 응답을 받았을 때,
+                var response = JSON.parse(xhr.responseText); // 서버로부터 받은 JSON 형태의 응답을 파싱합니다.
+                stillcutUrls = response.stillcutUrls; // 서버에서 받은 이미지 URL들을 배열에 저장합니다.
+                displayStillcuts(stillcutUrls); // 가져온 이미지 URL들을 표시하는 함수를 호출합니다.
+            }
+        };
+        xhr.send();
+
+        return stillcutUrls; // 이미지 URL 배열을 반환합니다.
     }
-});
+
+    // 가져온 이미지 URL들을 화면에 표시하는 함수
+    function displayStillcuts(stillcutUrls) {
+        var stillcutGallery = document.getElementById("stillcutGallery");
+        stillcutGallery.innerHTML = ""; // 이미지를 표시하기 전에 기존의 내용을 모두 지웁니다.
+
+        stillcutUrls.forEach(function (stillcutUrl) {
+            var img = document.createElement("img");
+            img.src = stillcutUrl;
+            img.style.width = "200px";
+            img.style.height = "auto";
+            img.style.margin = "5px";
+            stillcutGallery.appendChild(img);
+        });
+    }
+
     // 댓글 목록 로드 및 표시
     var commentList = document.getElementById("commentList");
     var comments = loadComments(movieIndex);
@@ -492,6 +508,9 @@ document.addEventListener("DOMContentLoaded", function () {
             commentInput.value = "";
         }
     });
+ // 추가로 스틸컷 이미지를 가져와서 화면에 표시합니다.
+    var stillcuts = loadStillcuts(movieIndex);
+    displayStillcuts(stillcuts);
 
 });
 </script>

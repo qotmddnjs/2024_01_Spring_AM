@@ -528,12 +528,17 @@ GROUP BY RP.relTypeCode,RP.relId
 CREATE TABLE movies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(250),
-    image VARCHAR(250),
+    image TEXT,
     genre VARCHAR(250),
-    detail VARCHAR(250),
+    detail TEXT,
     director VARCHAR(250),
-    actors VARCHAR(250)
+    actors VARCHAR(250),
+    stillcut TEXT
 );
+
+
+
+
 CREATE TABLE box_office (
     RANK INT,
     movie_name VARCHAR(255),
@@ -542,8 +547,10 @@ CREATE TABLE box_office (
     audience_acc INT
 );
 
-SELECT * FROM box_office;
-SELECT * FROM  movies;
+SELECT * FROM box_office; -- box_office 테이블의 모든 레코드 검색
+SELECT * FROM movies; -- movies 테이블의 모든 레코드 검색
+SELECT * FROM stillcuts;
+
 CREATE DATABASE crawl_data DEFAULT CHARACTER SET utf8;
 CREATE USER crawl_usr IDENTIFIED BY 'Test001';
 GRANT ALL ON crawl_data.* TO crawl_usr;
