@@ -35,7 +35,11 @@
 			<artifactId>selenium-chrome-driver</artifactId>
 			<version>4.16.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.13</version> <!-- 현재 최신 버전 확인 -->
+		</dependency>
 		<!-- WebDriver Manager -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>

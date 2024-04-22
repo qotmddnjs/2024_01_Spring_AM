@@ -43,6 +43,34 @@
 			</div>
 		</c:if>
 	</div>
+	
+	<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // 기본 동작 방지 (페이지 새로고침 방지)
+            const searchTerm = form.search.value;
+            // API에 요청 보내는 함수 호출
+            searchAPI(searchTerm);
+        });
+    });
+
+    async function searchAPI(searchTerm) {
+        const apiKey = '522fdab6a16d6de0da302e15b84bcb2f'; // 여기에 사용하려는 API의 키를 입력하세요
+        const url = `YOUR_API_ENDPOINT?search=${searchTerm}&apiKey=${apiKey}`; // API 엔드포인트와 쿼리 매개변수 설정
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            // 여기에서 API 응답 데이터를 처리하고 결과를 표시하는 코드 작성
+            console.log(data); // 예시로 콘솔에 데이터 출력
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    }
+</script>
 
 
 
