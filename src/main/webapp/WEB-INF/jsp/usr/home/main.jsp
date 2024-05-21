@@ -26,13 +26,50 @@
 
 	<hr style="border-top: 3px solid white;" />
 	<div class="navbar1" style="display: flex; justify-content: center;">
-		<!-- 검색 창 -->
-		<div class="search-container" style="margin-right: 950px;">
-			<form action="/search">
-				<input type="text" placeholder="검색..." name="search" style="width: 500px; height: 40px;">
-				<button type="submit">검색</button>
-			</form>
-		</div>
+<!-- 검색 창 -->
+<div class="search-container" style="margin-right: 950px;">
+    <form id="search-form">
+        <input id="search-input" type="text" placeholder="검색..." name="search" style="width: 500px; height: 40px;">
+        <button id="search-button" type="submit">검색</button> <!-- 검색 버튼에 id 추가 -->
+    </form>
+</div>
+
+<!-- 결과를 표시할 영역 -->
+<div id="movie-info" style="color: white;"></div>
+
+<script>
+    document.getElementById("search-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // 기본 이벤트(페이지 새로고침) 방지
+
+        var searchQuery = document.getElementById("search-input").value;
+
+        // REST API 호출
+        fetch("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=522fdab6a16d6de0da302e15b84bcb2f&movieCd=" + searchQuery)
+            .then(response => response.json())
+            .then(data => {
+                // 가져온 데이터를 처리하여 원하는 형태로 표시
+                var movieInfo = data.movieInfoResult.movieInfo;
+                document.getElementById("movie-info").innerHTML = `
+                    <h2>${movieInfo.movieNm}</h2>
+                    <p>영화명(영문): ${movieInfo.movieNmEn}</p>
+                    <p>제작연도: ${movieInfo.prdtYear}</p>
+                    <p>상영시간: ${movieInfo.showTm}분</p>
+                    <!-- 기타 정보들도 필요에 따라 표시 -->
+                `;
+            })
+            .catch(error => {
+                console.error("에러 발생:", error);
+                // 에러 메시지 표시 등의 처리
+            });
+    });
+
+    // 검색 버튼에 클릭 이벤트 리스너 추가
+    document.getElementById("search-button").addEventListener("click", function(event) {
+        document.getElementById("search-form").dispatchEvent(new Event("submit"));
+    });
+</script>
+
+
 		<c:if test="${not rq.isLogined() }">
 			<div class="login-signup-links">
 				<!-- 로그인 링크 -->

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.util.Crawlling;
 import com.example.demo.util.MovieScheduleScraperWithJsoup;
+import com.example.demo.util.movietime;
 
 @Controller
 public class UsrHomeController {
@@ -30,10 +31,15 @@ public class UsrHomeController {
 
 		return "redirect:/usr/home/main";
 	}
+//	@RequestMapping("/usr/crawll")
+//	public String doCrawll() {
+//		MovieScheduleScraperWithJsoup.main(new String[]{});
+//	    return "redirect:/usr/home/main";
+//	}
 	@RequestMapping("/usr/crawll")
 	public String doCrawll() {
-		MovieScheduleScraperWithJsoup.main(new String[]{});
-	    return "redirect:/usr/home/main";
+		movietime.movietimelist();
+		return "redirect:/usr/home/main";
 	}
 
 }
