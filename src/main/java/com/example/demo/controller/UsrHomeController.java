@@ -4,8 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.util.Crawlling;
-import com.example.demo.util.MovieScheduleScraperWithJsoup;
-import com.example.demo.util.movietime;
+
+import com.example.demo.util.MovieTime;
+
 
 @Controller
 public class UsrHomeController {
@@ -31,14 +32,10 @@ public class UsrHomeController {
 
 		return "redirect:/usr/home/main";
 	}
-//	@RequestMapping("/usr/crawll")
-//	public String doCrawll() {
-//		MovieScheduleScraperWithJsoup.main(new String[]{});
-//	    return "redirect:/usr/home/main";
-//	}
+
 	@RequestMapping("/usr/crawll")
 	public String doCrawll() {
-		movietime.movietimelist();
+		MovieTime.movieTimeList();
 		return "redirect:/usr/home/main";
 	}
 

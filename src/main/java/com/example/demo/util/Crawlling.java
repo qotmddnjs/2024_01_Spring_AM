@@ -113,8 +113,10 @@ public class Crawlling {
                 Elements stillcutElements = doc2.select("div.item-wrap div.item img[data-src]");
                 for (Element stillcutElement : stillcutElements) {
                     String stillcutUrl = stillcutElement.attr("data-src");
+                    vo.setStillcut(stillcutUrl); // 스틸컷 URL을 CgvVO 객체에 설정
                     System.out.println("스틸컷 이미지 URL: " + stillcutUrl);
                 }
+
 
 
 

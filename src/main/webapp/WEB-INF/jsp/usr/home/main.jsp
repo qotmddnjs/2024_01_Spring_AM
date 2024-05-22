@@ -38,31 +38,32 @@
 <div id="movie-info" style="color: white;"></div>
 
 <script>
-    document.getElementById("search-form").addEventListener("submit", function(event) {
-        event.preventDefault(); // 기본 이벤트(페이지 새로고침) 방지
+document.getElementById("search-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // 기본 이벤트(페이지 새로고침) 방지
 
-        var searchQuery = document.getElementById("search-input").value;
+    var movieCd = document.getElementById("search-input").value; // 영화 코드 입력 받기
 
-        // REST API 호출
-        fetch("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=522fdab6a16d6de0da302e15b84bcb2f&movieCd=" + searchQuery)
-            .then(response => response.json())
-            .then(data => {
-                // 가져온 데이터를 처리하여 원하는 형태로 표시
-                var movieInfo = data.movieInfoResult.movieInfo;
-                document.getElementById("movie-info").innerHTML = `
-                    <h2>${movieInfo.movieNm}</h2>
-                    <p>영화명(영문): ${movieInfo.movieNmEn}</p>
-                    <p>제작연도: ${movieInfo.prdtYear}</p>
-                    <p>상영시간: ${movieInfo.showTm}분</p>
-                    <!-- 기타 정보들도 필요에 따라 표시 -->
-                `;
-            })
-            .catch(error => {
-                console.error("에러 발생:", error);
-                // 에러 메시지 표시 등의 처리
-            });
-    });
-
+    // REST API 호출
+    fetch("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=522fdab6a16d6de0da302e15b84bcb2f&movieCd=" + movieCd)
+        .then(response => response.json())
+        .then(data => {
+            // 가져온 데이터를 처리하여 원하는 형태로 표시
+            var movieInfo = data.movieInfoResult.movieInfo;
+            document.getElementById("movie-info").innerHTML = `
+                <h2>${movieInfo.movieNm}</h2>
+                <p>영화명(영문): ${movieInfo.movieNmEn}</p>
+                <p>제작연도: ${movieInfo.prdtYear}</p>
+                <p>상영시간: ${movieInfo.showTm}분</p>
+                <p>감독: ${movieInfo.directors}</p>
+                <p>배우: ${movieInfo.actors}</p>
+                <!-- 기타 정보들도 필요에 따라 표시 -->
+            `; 
+        })
+        .catch(error => {
+            console.error("에러 발생:", error);
+            // 에러 메시지 표시 등의 처리
+        });
+});
     // 검색 버튼에 클릭 이벤트 리스너 추가
     document.getElementById("search-button").addEventListener("click", function(event) {
         document.getElementById("search-form").dispatchEvent(new Event("submit"));
@@ -114,28 +115,12 @@
 
 	<hr style="border-top: 3px solid white;" />
 
-	<title>Today 박스오피스</title>
-	<style type="text/css">
-/* 박스오피스 테이블의 텍스트 색상을 흰색으로 변경 */
-.wrap table tbody tr td {
-	color: white;
-}
+	
+	
 
-.ofice {
-	color: white;
-	margin-left: 1050px;
-	margin-top: 50px;
-}
+		
+	
 
-.white-text {
-	color: white;
-}
-
-.wrap {
-	float: right; /* 테이블을 오른쪽으로 이동 */
-	width: 50%; /* 테이블의 너비를 50%로 설정 */
-}
-</style>
 	<script type="text/javascript">
 
 // 조회할 날짜를 계산
@@ -215,50 +200,7 @@
 					}
 				});
 	});
-	// 영화 제목을 사용하여 TMDb API에서 해당하는 영화의 정보를 가져오는 함수
-	function searchMoviePoster(movieTitle) {
-	    var apiKey = "8bdb692a4e0f1be965aefd338b2787e4"; // 본인의 TMDb API 키로 대체
-	    var searchUrl = "https://api.themoviedb.org/3/search/movie";
-	    
-	    $.ajax({
-	        url: searchUrl,
-	        data: {
-	            api_key: apiKey,
-	            query: movieTitle
-	        },
-	        dataType: "json",
-	        success: function(data) {
-	            if (data.results && data.results.length > 0) {
-	                // 검색 결과에서 첫 번째 영화의 포스터 이미지 가져오기
-	                var posterPath = data.results[0].poster_path;
-	                if (posterPath) {
-	                    // 포스터 이미지 URL 생성
-	                    var posterUrl = "https://image.tmdb.org/t/p/w500" + posterPath;
-	                    // 가져온 이미지 URL을 사용하여 포스터를 표시하는 함수 호출
-	                    showMoviePoster(posterUrl);
-	                }
-	            }
-	        },
-	        error: function() {
-	            console.error("Error searching movie poster.");
-	        }
-	    });
-	}
-
-	// 가져온 포스터 이미지 URL을 사용하여 포스터를 표시하는 함수
-	function showMoviePoster(posterUrl) {
-	    // 이미지 요소를 생성합니다.
-	    var img = document.createElement('img');
-	    // 생성한 이미지 요소에 포스터 이미지 URL을 설정합니다.
-	    img.src = posterUrl;
-
-	    // 이미지의 스타일을 설정합니다.
-	    img.style.width = '200px'; // 이미지의 너비를 200px로 설정합니다. 원하는 크기로 수정하세요.
-	    img.style.height = '300px'; // 이미지의 높이를 300px로 설정합니다. 원하는 크기로 수정하세요.
-	    
-	    // 이미지를 .wrap 요소 안에 추가합니다.
-	    $(".wrap").append(img);
-	}
+	
 
 </script>
 
@@ -271,8 +213,71 @@ tbody>tr>td:hover {
 </style>
 </head>
 
-<h3 class="ofice">실시간 박스오피스</h3>
-<div class="wrap contaner"></div>
+<div class="box-office-wrapper" style="margin-top: 50px; background-color: #000;">
+    <div class="poster-container" >
+        <!-- 포스터 -->
+        <div class="custom-card">
+            <div class="custom-card-header">
+                <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86312/86312225702_727.jpg">
+          </div>
+        </div>
+    </div>
+    
+    <div class="wrap container"> 
+    <h3 class="ofice"></h3>
+    </div>
+</div>
+
+<style>
+    .box-office-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+    }
+
+    .poster-container {
+        margin-right: 20px; /* 포스터와 박스오피스 목록 사이의 간격을 설정합니다. */
+        display: flex;
+        align-items: center;
+    }
+
+    .wrap.container {
+        display: flex;
+        align-items: center;
+        width: 55%; /* 박스오피스 목록의 너비를 설정합니다. */
+    }
+
+    .custom-card {
+        display: flex;
+        margin-left: 250px; /* 오타 수정: margin-reft -> margin-left */
+    }
+
+    .custom-card-header {
+        margin-right: 10px;
+    }
+
+    .box-office-list ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .box-office-list ul li {
+        margin-bottom: 10px;
+    }
+</style>
+
+<br>
+<br>
+	<hr style="border-top: 3px solid white;" />
+
+
+
+
+
+
+
+
 
 </html>
 <%@ page import="java.util.List"%>
@@ -282,7 +287,7 @@ tbody>tr>td:hover {
 <%@ page import="com.example.demo.util.CgvService"%>
 <html>
 
-<div style="margin-top: 600px;">
+<div style="margin-top: 0px;">
 	<div class="wrapper">
 
 		<div class="carousel">
@@ -417,18 +422,18 @@ tbody>tr>td:hover {
 	<div class="board">
 		<h2>인기 영화</h2>
 		<ul class="post-list">
-			<li class="post">게시글 1</li>
-			<li class="post">게시글 2</li>
-			<li class="post">게시글 3</li>
+			<li class="post"></li>
+			<li class="post"></li>
+			<li class="post"></li>
 		</ul>
 	</div>
 
 	<div class="board">
 		<h2>인기 글</h2>
 		<ul class="post-list">
-			<li class="post">게시글 1</li>
-			<li class="post">게시글 2</li>
-			<li class="post">게시글 3</li>
+			<li class="post"></li>
+			<li class="post"></li>
+			<li class="post"></li>
 		</ul>
 	</div>
 </div>
@@ -744,102 +749,4 @@ function addListClickEvent() {
 // 검색 결과 목록에 클릭 이벤트를 추가합니다
 addListClickEvent();
 </script>
-<style>
-    .schedule .step {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 네 개의 칸으로 구성된 그리드 */
-        gap: 10px; /* 칸 사이의 간격 */
-    }
-</style>
-
-<div class="schedule">
-    <div class="fl step1 on"><!-- 해당 단계일 때 .on 추가 -->
-        <strong>광역</strong>
-        <ul>
-            <li wideareacd="0105001" onclick="selectedWidearea(this, '0105001');">
-                <input type="radio" name="step1" id="step1_1" autocomplete="off">
-                <label for="step1_1">서울시</label>
-            </li>
-            <!-- 다른 지역 목록들 -->
-        </ul>
-    </div>
-    <div class="fl step2"><!-- 해당 단계일 때 .on 추가 -->
-        <strong>기초</strong>
-        <ul id="sBasareaCd"></ul>
-    </div>
-    <div class="fl step3"><!-- 해당 단계일 때 .on 추가 -->
-        <strong>영화상영관</strong>
-        <ul id="sTheaCd"></ul>
-    </div>
-    <div class="ovf step4"><!-- 해당 단계일 때 .on 추가 -->
-        <div class="date">
-            <p><strong>4월 3일</strong></p>
-            <a href="javascript:;" class="prev" id="previous"><span class="ico_comm">이전</span></a>
-            <a href="javascript:;" class="next" id="next"><span class="ico_comm">다음</span></a>
-        </div>
-        <ul id="schedule"></ul>
-    </div>
-    <a href="" class="btn_book">예매</a>
-</div>
-<script>
-    // 각 단계의 목록을 숨기는 함수
-    function hideAllSteps() {
-        var steps = document.querySelectorAll('.schedule .step');
-        steps.forEach(function(step) {
-            step.classList.remove('on');
-        });
-    }
-
-    // 각 단계의 목록을 보여주는 함수
-    function showStep(stepNumber) {
-        hideAllSteps();
-        var step = document.querySelector('.schedule .step.step' + stepNumber);
-        step.classList.add('on');
-    }
-
-    // 이전 버튼 클릭 시 이벤트 핸들러
-    document.getElementById('previous').addEventListener('click', function() {
-        var currentStep = document.querySelector('.schedule .step.on');
-        if (currentStep.previousElementSibling) {
-            currentStep.classList.remove('on');
-            currentStep.previousElementSibling.classList.add('on');
-        }
-    });
-
-    // 다음 버튼 클릭 시 이벤트 핸들러
-    document.getElementById('next').addEventListener('click', function() {
-        var currentStep = document.querySelector('.schedule .step.on');
-        if (currentStep.nextElementSibling) {
-            currentStep.classList.remove('on');
-            currentStep.nextElementSibling.classList.add('on');
-        }
-    });
-
-    // 각 단계 클릭 시 이벤트 핸들러
-    var stepLinks = document.querySelectorAll('.schedule .step strong');
-    stepLinks.forEach(function(link) {
-        link.addEventListener('click', function() {
-            var stepNumber = this.parentElement.classList[1].replace('step', '');
-            showStep(stepNumber);
-        });
-    });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<%@ include file="../common/foot.jspf"%>
