@@ -218,12 +218,14 @@ tbody>tr>td:hover {
         <!-- 포스터 -->
         <div class="custom-card">
             <div class="custom-card-header">
-                <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000086/86312/86312225702_727.jpg">
+                <img src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88104/88104_320.jpg"  style="width: 350px; height: auto;">
+               
           </div>
+          
         </div>
     </div>
     
-    <div class="wrap container"> 
+    <div class="wrap container" style = "color: white;"> 
     <h3 class="ofice"></h3>
     </div>
 </div>
@@ -498,6 +500,7 @@ tbody>tr>td:hover {
 		<hr style="border-top: 3px solid white;" />
 
 		<title>영화관 위치</title>
+		
 		<style>
 
 </style>
@@ -749,4 +752,6 @@ function addListClickEvent() {
 // 검색 결과 목록에 클릭 이벤트를 추가합니다
 addListClickEvent();
 </script>
+
+
 		<%@ include file="../common/foot.jspf"%>

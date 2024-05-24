@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -108,17 +110,15 @@ public class Crawlling {
                     }
                 }
 
-              
-             // 스틸컷 이미지 가져오기
+                // 스틸컷 이미지 가져오기
                 Elements stillcutElements = doc2.select("div.item-wrap div.item img[data-src]");
+                List<String> stillcutUrls = new ArrayList<>();
                 for (Element stillcutElement : stillcutElements) {
                     String stillcutUrl = stillcutElement.attr("data-src");
-                    vo.setStillcut(stillcutUrl); // 스틸컷 URL을 CgvVO 객체에 설정
+                    stillcutUrls.add(stillcutUrl); // 스틸컷 URL을 리스트에 추가
                     System.out.println("스틸컷 이미지 URL: " + stillcutUrl);
                 }
-
-
-
+                vo.setStillcuts(stillcutUrls); // 스틸컷 URL 리스트를 CgvVO 객체에 설정
 
                 // 영화소개 및 상세정보 부분
                 String detail = doc2.select("div.sect-story-movie").text(); // 첫 번째 p 태그 선택
@@ -133,8 +133,8 @@ public class Crawlling {
                 e.printStackTrace();
             } finally {
                 try {
-                    in.close();
-                    out.close();
+                    if (in != null) in.close();
+                    if (out != null) out.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

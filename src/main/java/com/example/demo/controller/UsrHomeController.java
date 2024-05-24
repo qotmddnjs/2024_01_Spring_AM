@@ -33,10 +33,10 @@ public class UsrHomeController {
 		return "redirect:/usr/home/main";
 	}
 
-	@RequestMapping("/usr/crawll")
-	public String doCrawll() {
-		MovieTime.movieTimeList();
-		return "redirect:/usr/home/main";
-	}
+//	@RequestMapping("/usr/crawll")
+//	public String doCrawll() {
+//		MovieTime.movieTimeList();
+//		return "redirect:/usr/home/main";
+//	}
 
 }

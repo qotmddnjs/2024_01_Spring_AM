@@ -3,12 +3,12 @@
 <c:set var="pageTitle" value="MYPAGE"></c:set>
 <%@ include file="../common/head.jspf"%>
 
-<%-- <div>${loginedMember }</div>
+ <div>${loginedMember }</div>
 <div>${loginedMember.loginId }</div>
 <div>${rq.loginedMember }</div>
 <div>${rq.loginedMember.loginId }</div>
 <div>${rq.loginedMember.getLoginId() }</div> --%>
-<%-- <section class="mt-8 text-xl px-4 ">
+<section class="mt-8 text-xl px-4 ">
 	<div class="">
 		<table class="table-box-1 " border="1">
 			<colgroup>
@@ -54,9 +54,9 @@
 
 
 	</div>
-</section> --%>
+</section> 
 
-<hr style="border-top: 3px solid white;" />
+<!-- <hr style="border-top: 3px solid white;" />
 <div class="mupageba">
   <div class="mupageba1"></div>
   <div class="mupageba2">	
@@ -65,7 +65,7 @@
     <a href="">보안</a>
     <a href=""></a>
     <div class ="mupageba3"></div>
-  </div> 
+  </div>  -->
   <!-- <div class="information">
     여기에 정보를 추가해주세요.
     <div>

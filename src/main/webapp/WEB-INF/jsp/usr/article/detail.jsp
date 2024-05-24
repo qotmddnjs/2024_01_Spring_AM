@@ -9,12 +9,9 @@
 <%@ page import="com.example.demo.vo.CgvVO" %>
 <%@ page import="com.example.demo.util.CgvService" %>
 
-
-
-</section>  --%>
 <body class="detail" style="background-color: black; color: white; margin: 0; padding: 0;">
     <div style="text-align: left; padding: 20px;">
-        <h1 style="font-size: 24px;">영화 상세정보</h1>
+        <h1 style="font-size: 24px;">상세정보</h1>
         <%-- 영화 목록을 가져와서 JavaScript 배열로 변환 --%>
         <%
             List<CgvVO> movies = new CgvDAO().getMovies();
@@ -23,25 +20,95 @@
         %>
         <div>
             <!-- 영화 이미지 -->
-            <div style="float: left; margin-left:400px; margin-right: 20px;">
-                <img src="<%= movie.getImage() %>" alt="<%= movie.getTitle() %>" style="width: 700px; height: auto;">
+            <div style="float: left; margin-left:400px; margin-right: 100px;">
+            
+                <img src="<%= movie.getImage() %>" alt="<%= movie.getTitle() %>" style="width: 600px; height: auto;">
             </div>
+            
             <!-- 제목, 장르, 감독 및 배우 -->
-            <div style="overflow: hidden; margin-top: 20px; margin-bottom: 20px; margin-right:400px;font-size: 24px;">
+            <div style="overflow: hidden; margin-top: 20px; margin-bottom: 20px; margin-right:300px;font-size: 24px;">
                 <p><strong>제목:</strong> <%= movie.getTitle() %></p>
-                <p><strong>장르:</strong> <%= movie.getGenre() %></p>
+                <br>
+                <p><strong>장르: SF판타지</strong> <%= movie.getGenre() %></p>
+                <br>
                 <p><strong>감독:</strong> <%= movie.getDirector() %></p>
+                <br>
                 <p><strong>배우:</strong> <%= movie.getActors() %></p> <!-- 배우 정보 추가 -->
+                <br>
                 <!-- 기타 영화의 상세 정보를 표시할 수 있습니다 -->
-                <div >
-                <p><strong>상세:</strong> <%= movie.getDetail() %></p> <!-- 상세 정보 추가 -->
+                <div>
+                    <p><strong>상세:</strong> <%= movie.getDetail() %></p> <!-- 상세 정보 추가 -->
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            
+            
             <!-- 스틸컷 이미지 -->
             <div style="clear: both; margin-left:400px;">
-                <h2 style="font-size: 20px; margin-top: 20px;">스틸컷 이미지</h2>
+               
+                 <br>
+            <br>
+            <br>
+            
+           <div class="stillcut-gallery">
+    <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88148/88148224378_727.jpg" alt="Stillcut 1">
+    <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88148/88148225267_727.jpeg" alt="Stillcut 2">
+    <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88148/88148225268_727.jpg" alt="Stillcut 3">
+    <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88148/88148225266_727.jpg" alt="Stillcut 4">
+    <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88148/88148225269_727.jpeg" alt="Stillcut 5">
+    <img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88148/88148225270_727.jpeg" alt="Stillcut 6">
+</div>
+
+<style>
+    .stillcut-gallery {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 10px 0;
+    }
+    .stillcut-gallery img {
+        margin-right: 10px;
+        height: auto;
+        width: 250px;
+    }
+    .stillcut-gallery img:last-child {
+        margin-right: 0;
+    }
+</style>
                 <div id="stillcutGallery" style="display: flex; flex-wrap: wrap;">
-                    <!-- 이 곳에 스틸컷 이미지를 표시할 영역을 만들 것입니다. -->
+                    <%-- Display still-cut images --%>
+                    <%
+                    List<String> stillcutUrls = movie.getStillcuts(); // 수정된 부분
+                        if (stillcutUrls != null) {
+                            for (String stillcutUrl : stillcutUrls) {
+                    %>
+                                <img src="<%= stillcutUrl %>" alt="Stillcut Image" style="width: 200px; height: auto; margin: 5px;">
+                    <%
+                            }
+                        }
+                    %>
+                </div>
+            </div>
+          <!-- Like and Dislike Buttons -->
+<div style="clear: both; margin-left:400px; margin-top: 20px;">
+    <button id="likeButton" style="font-size: 20px; margin-right: 10px; background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">좋아요</button>
+    <button id="dislikeButton" style="font-size: 20px; background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">싫어요</button>
+    <p id="likeCount" style="font-size: 16px;">좋아요: 0</p>
+    <p id="dislikeCount" style="font-size: 16px;">싫어요: 0</p>
+</div>
+            <!-- Comment Form -->
+            <div style="clear: both; margin-left:400px; margin-top: 20px;">
+                <h2 style="font-size: 20px;">댓글</h2>
+                <form id="commentForm" style="margin-top: 10px;">
+                    <textarea id="commentText" rows="4" cols="50" placeholder="댓글을 입력하세요..." style="font-size: 16px;"></textarea><br>
+                    <button type="button" id="submitComment" style="font-size: 16px; margin-top: 10px;">댓글 달기</button>
+                </form>
+                <div id="commentSection" style="margin-top: 20px; font-size: 16px;">
+                    <!-- Comments will be displayed here -->
                 </div>
             </div>
         </div>
@@ -85,49 +152,36 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 댓글 목록 로드 및 표시
-    var commentList = document.getElementById("commentList");
-    var comments = loadComments(movieIndex);
-    comments.forEach(function (comment) {
-        var li = document.createElement("li");
-        li.textContent = comment;
-        commentList.appendChild(li);
-    });
-    function saveComment(movieIndex, comment) {
-        console.log("댓글 저장 함수 호출됨: 인덱스 =", movieIndex, "댓글 =", comment);
-    }
- // 댓글 폼 제출 이벤트 리스너
-    var commentForm = document.getElementById("commentForm");
-    commentForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // 기본 제출 동작 방지
-        var commentInput = document.getElementById("commentInput");
-        var comment = commentInput.value.trim(); // 입력된 댓글 가져오기s
-        if (comment !== "") {
-            // 댓글 저장하고 UI에 표시
-            saveComment(movieIndex, comment);
-            var li = document.createElement("li");
-            li.textContent = comment;
-            commentList.appendChild(li);
-            // 입력 필드 비우기
-            commentInput.value = "";
-        }
-    });
- // 추가로 스틸컷 이미지를 가져와서 화면에 표시합니다.
-/*     var stillcuts = loadStillcuts(movieIndex);
+    // 추가로 스틸컷 이미지를 가져와서 화면에 표시합니다.
+    var stillcuts = loadStillcuts(movieIndex);
     displayStillcuts(stillcuts);
 
-}); */
+    // Handle like and dislike button clicks
+    var likeCount = 0;
+    var dislikeCount = 0;
+
+    document.getElementById("likeButton").addEventListener("click", function() {
+        likeCount++;
+        document.getElementById("likeCount").innerText = "Likes: " + likeCount;
+    });
+
+    document.getElementById("dislikeButton").addEventListener("click", function() {
+        dislikeCount++;
+        document.getElementById("dislikeCount").innerText = "Dislikes: " + dislikeCount;
+    });
+
+    // Handle comment submission
+    document.getElementById("submitComment").addEventListener("click", function() {
+        var commentText = document.getElementById("commentText").value;
+        if (commentText.trim() !== "") {
+            var commentSection = document.getElementById("commentSection");
+            var comment = document.createElement("p");
+            comment.innerText = commentText;
+            commentSection.appendChild(comment);
+            document.getElementById("commentText").value = ""; // Clear the textarea
+        }
+    });
+});
 </script>
-
-   
-</body>
-
-
-
-
-
-
-
-
 
 <%@ include file="../common/foot.jspf"%>

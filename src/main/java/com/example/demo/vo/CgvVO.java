@@ -1,14 +1,18 @@
 package com.example.demo.vo;
 
+import java.util.List;
+
 public class CgvVO {
     private String title;
     private String image;
     private String genre;
-    private String director; // 감독 정보 추가
-    private String actors; // 배우 정보 추가
+    private String director;
+    private String actors;
     private int bookcnt;
     private String detail;
-    private String stillcut; // 스틸컷 이미지 URL 추가
+    private List<String> stillcuts; // List to store multiple still-cut URLs
+
+    // Getters and Setters
 
     public String getGenre() {
         return genre;
@@ -50,7 +54,6 @@ public class CgvVO {
         this.detail = detail;
     }
 
-    // 감독 정보 설정
     public String getDirector() {
         return director;
     }
@@ -59,7 +62,6 @@ public class CgvVO {
         this.director = director;
     }
 
-    // 배우 정보 설정
     public String getActors() {
         return actors;
     }
@@ -68,12 +70,11 @@ public class CgvVO {
         this.actors = actors;
     }
 
-    // 스틸컷 이미지 URL 설정
-    public String getStillcut() {
-        return stillcut;
+    public List<String> getStillcuts() {
+        return stillcuts;
     }
 
-    public void setStillcut(String stillcut) {
-        this.stillcut = stillcut;
+    public void setStillcuts(List<String> stillcuts) {
+        this.stillcuts = stillcuts;
     }
 }
