@@ -9,7 +9,7 @@
 mysql ############################################### 줄 위로 생성후 나머지 테이블 생성
 
 - 주소창에 http://localhost:8082/usr/crawl   http://localhost:8082/usr/crawll  입력후 크롤링
-
+- 크롤링 완료후 메인페이지 자동이동
 
 ### 크롤링한 사이트
 - (http://www.cgv.co.kr/movies/?lt=1&ft=0)
