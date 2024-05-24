@@ -1,3 +1,8 @@
+
+[개인프로젝트.pptx](https://github.com/qotmddnjs/2024_Movie_project/files/15426460/default.pptx)
+[프로젝트 결과보고서(배승원).xlsx](https://github.com/qotmddnjs/2024_Movie_project/files/15428391/default.xlsx)
+
+
 ### 실행방법
 ![image](https://github.com/qotmddnjs/2024_Movie_project/assets/153142786/40c1c903-ef23-4bba-8d77-f1dd90072f4f)
 
@@ -5,8 +10,7 @@ mysql ############################################### 줄 위로 생성후 나�
 
 - 주소창에 http://localhost:8082/usr/crawl   http://localhost:8082/usr/crawll  입력후 크롤링
 
-###  프로젝트pptx
-[개인프로젝트.pptx](https://github.com/qotmddnjs/2024_Movie_project/files/15426460/default.pptx)
+
 ### 크롤링한 사이트
 - (http://www.cgv.co.kr/movies/?lt=1&ft=0)
 - (https://www.kobis.or.kr/kobis/business/mast/thea/findTheaterSchedule.do)
