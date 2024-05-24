@@ -536,6 +536,32 @@ CREATE TABLE movies (
     stillcut TEXT
 );
 
+CREATE TABLE stillcuts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT,
+    stillcut_url VARCHAR(255),
+    FOREIGN KEY (movie_id) REFERENCES movies(id)
+);
+
+CREATE TABLE stillcuts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    stillcut_url VARCHAR(255)
+);
+
+CREATE DATABASE IF NOT EXISTS MovieDatabase;
+
+USE MovieDatabase;
+
+CREATE TABLE IF NOT EXISTS movie_schedule (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    wide_area INT NOT NULL,
+    base_area VARCHAR(255) NOT NULL,
+    theater VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    screening_times TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
 
@@ -547,13 +573,10 @@ CREATE TABLE box_office (
     audience_acc INT
 );
 
+SELECT * FROM movie_schedule;
 SELECT * FROM box_office; -- box_office 테이블의 모든 레코드 검색
 SELECT * FROM movies; -- movies 테이블의 모든 레코드 검색
 SELECT * FROM stillcuts;
-
-CREATE DATABASE crawl_data DEFAULT CHARACTER SET utf8;
-CREATE USER crawl_usr IDENTIFIED BY 'Test001';
-GRANT ALL ON crawl_data.* TO crawl_usr;
 
 SELECT USER();
 SELECT DATABASE();
