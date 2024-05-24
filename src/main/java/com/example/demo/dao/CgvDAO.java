@@ -1,4 +1,4 @@
-package com.example.demo.util;
+package com.example.demo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.util.DatabaseUtil;
 import com.example.demo.vo.CgvVO;
 
 public class CgvDAO {

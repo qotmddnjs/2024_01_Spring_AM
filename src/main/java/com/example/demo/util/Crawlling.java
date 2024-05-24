@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.example.demo.dao.CgvDAO;
 import com.example.demo.vo.CgvVO;
 
 public class Crawlling {

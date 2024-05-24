@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MAIN"></c:set>
 <%@ include file="../common/head.jspf"%>
+<%@ page import="com.example.demo.vo.MovieScheduleVO" %>
+<%@ page import="com.example.demo.dao.MovieScheduleDAO" %>
+<%@ page import="java.sql.*" %>
 
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
@@ -284,9 +287,9 @@ tbody>tr>td:hover {
 </html>
 <%@ page import="java.util.List"%>
 <!-- List 클래스 import -->
-<%@ page import="com.example.demo.util.CgvDAO"%>
+<%@ page import="com.example.demo.dao.CgvDAO"%>
 <%@ page import="com.example.demo.vo.CgvVO"%>
-<%@ page import="com.example.demo.util.CgvService"%>
+<%@ page import="com.example.demo.service.CgvService"%>
 <html>
 
 <div style="margin-top: 0px;">
@@ -527,7 +530,7 @@ tbody>tr>td:hover {
 		</div>
 
 		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a2c532db563d64e7bbbdc218fef94d&libraries=services"></script>
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b9a2c53	2db563d64e7bbbdc218fef94d&libraries=services"></script>
 		<script>
 // 마커를 담을 배열입니다
 var markers = [];
@@ -754,4 +757,68 @@ addListClickEvent();
 </script>
 
 
+<head>
+    <title>Movie Schedule</title>
+</head>
+<body>
+    <div class="movie-schedule-container">
+        <h1>영화 시간표</h1>
+        <select id="wideAreaSelect">
+            <option value="">광역 지역 선택</option>
+            <!-- 광역 지역 옵션이 이곳에 동적으로 추가됩니다 -->
+        </select>
+        <select id="baseAreaSelect" style="display:none;">
+            <option value="">기초 지역 선택</option>
+            <!-- 기초 지역 옵션이 이곳에 동적으로 추가됩니다 -->
+        </select>
+        <select id="theaterSelect" style="display:none;">
+            <option value="">상영관 선택</option>
+            <!-- 상영관 옵션이 이곳에 동적으로 추가됩니다 -->
+        </select>
+        <table id="movieTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>영화 제목</th>
+                    <th>상영 시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 영화 정보가 이곳에 동적으로 추가됩니다 -->
+            </tbody>
+        </table>
+    </div>
+
+   <script>
+    // 영화 시간표 데이터를 비동기적으로 가져와서 화면에 표시하는 함수
+    function fetchMovieSchedule() {
+        // AJAX를 통해 서버로부터 영화 시간표 데이터를 가져옵니다.
+        // 이 예제에서는 MovieScheduleController 클래스의 getMovieScheduleData() 메서드를 호출하여 데이터를 가져옵니다.
+        $.ajax({
+            type: 'GET',
+            url: '/getMovieScheduleData', // MovieScheduleController에서 데이터를 제공하는 엔드포인트
+            success: function(response) {
+                // 가져온 데이터를 JavaScript 객체로 변환합니다.
+                var movieScheduleData = JSON.parse(response);
+
+                // 광역 지역 옵션 동적 추가
+                var wideAreaSelect = document.getElementById('wideAreaSelect');
+                wideAreaSelect.innerHTML = '<option value="">광역 지역 선택</option>';
+                movieScheduleData.forEach(function(movie) {
+                    var option = document.createElement('option');
+                    option.value = movie.wideArea; // 수정된 부분
+                    option.textContent = movie.baseArea; // 수정된 부분
+                    wideAreaSelect.appendChild(option);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    // 페이지 로드 시 영화 시간표 데이터를 가져와서 화면에 표시합니다.
+    $(document).ready(function() {
+        fetchMovieSchedule();
+    });
+</script>
 		<%@ include file="../common/foot.jspf"%>

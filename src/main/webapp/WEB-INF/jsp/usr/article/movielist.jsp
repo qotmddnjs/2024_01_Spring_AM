@@ -5,9 +5,9 @@
 <%@ include file="../common/head.jspf"%>
 <%@ include file="../common/toastUiEditorLib.jspf"%>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.demo.util.CgvDAO" %>
+<%@ page import="com.example.demo.dao.CgvDAO" %>
 <%@ page import="com.example.demo.vo.CgvVO" %>
-<%@ page import="com.example.demo.util.CgvService" %>
+<%@ page import="com.example.demo.service.CgvService" %>
 
 
 

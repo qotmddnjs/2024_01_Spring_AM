@@ -1,12 +1,11 @@
 package com.example.demo.util;
+
+import com.example.demo.dao.MovieScheduleDAO;
+import com.example.demo.vo.MovieScheduleVO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class MovieTime {
     public static void movieTimeList() {
@@ -19,8 +18,8 @@ public class MovieTime {
         // 크롤링할 웹 페이지의 URL
         String url = "https://www.kobis.or.kr/kobis/business/mast/thea/findTheaterSchedule.do";
 
-        // 데이터베이스 연결
-        Connection connection = DatabaseUtil.getConnection();
+        // DAO 인스턴스 생성
+        MovieScheduleDAO movieScheduleDAO = new MovieScheduleDAO();
 
         try {
             // 웹 페이지로 이동
@@ -73,17 +72,11 @@ public class MovieTime {
                                 System.out.println("Screening Times: " + screeningTimes);
                                 System.out.println();
 
-                                // 데이터베이스에 삽입
-                                if (connection != null) {
-                                    String insertQuery = "INSERT INTO movie_schedule (wide_area, base_area, theater, title, screening_times) VALUES (?, ?, ?, ?, ?)";
-                                    PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-                                    preparedStatement.setInt(1, wideAreaIndex);
-                                    preparedStatement.setString(2, baseAreaElement.getText());
-                                    preparedStatement.setString(3, theaterElement.getText());
-                                    preparedStatement.setString(4, movieTitle);
-                                    preparedStatement.setString(5, screeningTimes);
-                                    preparedStatement.executeUpdate();
-                                }
+                                // VO 생성
+                                MovieScheduleVO movieSchedule = new MovieScheduleVO(wideAreaIndex, baseAreaElement.getText(), theaterElement.getText(), movieTitle, screeningTimes);
+
+                                // DAO를 통해 데이터베이스에 삽입
+                                movieScheduleDAO.insertMovieSchedule(movieSchedule);
                             } catch (Exception e) {
                                 // NoSuchElementException이 발생하면 해당 요소를 찾지 못했음을 알리고 다음으로 넘어감
                                 System.out.println("Movie information not found.");
@@ -98,15 +91,6 @@ public class MovieTime {
         } finally {
             // WebDriver 종료
             driver.quit();
-            // 데이터베이스 연결 종료
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
-

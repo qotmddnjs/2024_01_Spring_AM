@@ -1,9 +1,9 @@
-package com.example.demo.util;
+package com.example.demo.service;
 
 import java.util.List;
 import com.example.demo.vo.CgvVO;
 
-public class CgvService {
+public class CgvService2 {
 
     public static String generateImageUrls(List<CgvVO> movies) {
         StringBuilder imageUrls = new StringBuilder("[");
